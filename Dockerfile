@@ -49,9 +49,6 @@ VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper", "/var/log/zookeeper"]
 ADD container/usr/bin/start-zookeeper-server.sh /usr/bin/start-zookeeper-server.sh
 ADD container/usr/bin/stop-zookeeper-server.sh /usr/bin/stop-zookeeper-server.sh
 
-# for now use default configuration
-RUN cp ${ZOOKEEPER_HOME}/conf/zoo_sample.cfg ${ZOOKEEPER_HOME}/conf/zoo.cfg
-
 # ensure executable
 RUN chmod +x /usr/bin/start-zookeeper-server.sh
 RUN chmod +x /usr/bin/stop-zookeeper-server.sh

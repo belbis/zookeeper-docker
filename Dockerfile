@@ -54,7 +54,7 @@ RUN chmod +x /usr/bin/start-zookeeper-server.sh
 RUN chmod +x /usr/bin/stop-zookeeper-server.sh
 
 # for now use default configuraiton
-cp ${ZOOKEEPER_HOME}/conf/zoo_sample.cfg ${ZOOKEEPER_HOME}/conf/zoo.cfg
+RUN cp ${ZOOKEEPER_HOME}/conf/zoo_sample.cfg ${ZOOKEEPER_HOME}/conf/zoo.cfg
 
 # start the server
 RUN /usr/bin/start-zookeeper-server.sh

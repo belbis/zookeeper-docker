@@ -8,9 +8,11 @@ MAINTAINER Michael Dreibelbis <mike (at) belbis.com>
 
 ENV ZOOKEEPER_HOME /opt/zookeeper
 ENV ZOOKEEPER_LOG /var/log/zookeeper
+ENV ZOOKEEPER_DATA /var/zookeeper
 ENV ZOOKEEPER_TMP /tmp/zookeeper
 ENV ZOOKEEPER_PORT1 2888
 ENV ZOOKEEPER_PORT2 3888
+ENV ZOOKEEPER_ID 0
 
 # install deps
 RUN apt-get update && apt-get install -y wget

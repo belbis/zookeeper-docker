@@ -6,10 +6,10 @@ if [ -z ${ZOOKEEPER_ID} ] ; then
   exit -1
 fi
 
-# sleeps until a zoo.cfg file appears
-if [ ! -f ${ZOOKEEPER_HOME}/conf/zoo.cfg ] ; then
+# sleeps until a zookeeper.cfg file appears
+if [ ! -f ${ZOOKEEPER_HOME}/conf/zookeeper.cfg ] ; then
   echo 'Waiting for config file to appear...'
-  while [ ! -f ${ZOOKEEPER_HOME}/conf/zoo.cfg ] ; do
+  while [ ! -f ${ZOOKEEPER_HOME}/conf/zookeeper.cfg ] ; do
     sleep 1
   done
   echo 'Config file found, starting server.'

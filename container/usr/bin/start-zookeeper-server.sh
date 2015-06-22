@@ -6,6 +6,9 @@ if [ -z ${ZOOKEEPER_ID} ] ; then
   exit -1
 fi
 
+cp ${ZOOKEEPER_HOME}/conf/zoo_sample.cfg ${ZOOKEEPER_HOME}/conf/zookeeper.cfg
+
+
 # sleeps until a zookeeper.cfg file appears
 if [ ! -f ${ZOOKEEPER_HOME}/conf/zookeeper.cfg ] ; then
   echo 'Waiting for config file to appear...'
@@ -29,4 +32,4 @@ echo "${ZOOKEEPER_ID}" > ${ZOOKEEPER_DATA}/myid
 
 # start the script
 #exec /opt/zookeeper/bin/zkServer.sh start-foreground >> $ZOO_LOG_DIR/zk-console.log 2>&1
-exec ${ZOOKEEPER_HOME}/bin/zkServer.sh start-foreground >> ${ZOOKEEPER_LOG} 2>&1
+exec ${ZOOKEEPER_HOME}/bin/zkServer.sh start-foreground >> ${ZOOKEEPER_LOGDIR}/${ZOOKEEPER_LOGFILE} 2>&1

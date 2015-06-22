@@ -7,7 +7,8 @@ FROM java:8
 MAINTAINER Michael Dreibelbis <mike (at) belbis.com>
 
 ENV ZOOKEEPER_HOME /opt/zookeeper
-ENV ZOOKEEPER_LOG /var/log/zookeeper
+ENV ZOOKEEPER_LOGDIR /var/log/zookeeper
+ENV ZOOKEEPER_LOGFILE zookeeper.out
 ENV ZOOKEEPER_DATA /var/zookeeper
 ENV ZOOKEEPER_TMP /tmp/zookeeper
 ENV ZOOKEEPER_PORT1 2888
@@ -19,7 +20,7 @@ RUN apt-get update && apt-get install -y wget
 
 # setup env and download jar
 RUN mkdir -p ${ZOOKEEPER_HOME} \
-    && mkdir -p ${ZOOKEEPER_LOG} \
+    && mkdir -p ${ZOOKEEPER_LOGDIR} \
     && curl -SL http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz \
     | tar -xz -C ${ZOOKEEPER_HOME} --strip-components=1 && chown -R root:root ${ZOOKEEPER_HOME}
 
@@ -41,7 +42,7 @@ WORKDIR /opt/zookeeper
 
 # volumes
 # TODO: change these to vars?
-VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper"]
+VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper", "/var/log/zookeeper"]
 
 # start zookeeper
 # add external path
@@ -51,8 +52,6 @@ ADD container/usr/bin/stop-zookeeper-server.sh /usr/bin/stop-zookeeper-server.sh
 # ensure executable
 RUN chmod +x /usr/bin/start-zookeeper-server.sh
 RUN chmod +x /usr/bin/stop-zookeeper-server.sh
-
-RUN cp ${ZOOKEEPER_HOME}/conf/zoo_sample.cfg ${ZOOKEEPER_HOME}/conf/zookeeper.cfg
 
 # start the server
 RUN /usr/bin/start-zookeeper-server.sh

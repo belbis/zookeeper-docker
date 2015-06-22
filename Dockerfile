@@ -44,4 +44,4 @@ RUN chmod +x /usr/bin/start-zookeeper-server.sh
 RUN chmod +x /usr/bin/stop-zookeeper-server.sh
 
 # start the server
-CMD /usr/bin/start-zookeeper-server.sh &
+CMD /usr/bin/start-zookeeper-server.sh

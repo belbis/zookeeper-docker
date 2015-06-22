@@ -41,19 +41,14 @@ WORKDIR /opt/zookeeper
 # TODO: change these to vars?
 VOLUME ["/opt/zookeeper/conf", "/tmp/zookeeper"]
 
-# add external path
-# ADD start-zookeeper-server.sh /usr/bin/start-zookeeper-server.sh
-# ADD stop-zookeeper-server.sh /usr/bin/stop-zookeeper-server.sh
-
-# deploy upstart script
-ADD deploy/etc/init/zookeeper.conf /etc/init/zookeeper.conf
-
 # start zookeeper
-RUN service zookeeper start
+# add external path
+ADD container/usr/bin/start-zookeeper-server.sh /usr/bin/start-zookeeper-server.sh
+ADD container/usr/bin/stop-zookeeper-server.sh /usr/bin/stop-zookeeper-server.sh
 
 # ensure executable
-# RUN chmod +x /usr/bin/start-zookeeper-server.sh
-# RUN chmod +x /usr/bin/stop-zookeeper-server.sh
+RUN chmod +x /usr/bin/start-zookeeper-server.sh
+RUN chmod +x /usr/bin/stop-zookeeper-server.sh
 
-#ENTRYPOINT ["/opt/zookeeper/bin/zkServer.sh"]
-#CMD ["start-foreground"]
+# start the server
+RUN /usr/bin/start-zookeeper-server.sh

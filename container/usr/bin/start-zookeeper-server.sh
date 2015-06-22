@@ -6,9 +6,6 @@ if [ -z ${ZOOKEEPER_ID} ] ; then
   exit -1
 fi
 
-cp ${ZOOKEEPER_HOME}/conf/zoo_sample.cfg ${ZOOKEEPER_HOME}/conf/zookeeper.cfg
-
-
 # sleeps until a zookeeper.cfg file appears
 if [ ! -f ${ZOOKEEPER_HOME}/conf/zookeeper.cfg ] ; then
   echo 'Waiting for config file to appear...'

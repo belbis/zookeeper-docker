@@ -24,16 +24,6 @@ RUN mkdir -p ${ZOOKEEPER_HOME} \
     && curl -SL http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz \
     | tar -xz -C ${ZOOKEEPER_HOME} --strip-components=1 && chown -R root:root ${ZOOKEEPER_HOME}
 
-# deprecated
-# download zookeeper from host
-#RUN wget -q -O - http://apache.mirrors.pair.com/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz | tar -xzf - -C /opt \
-#    && mv /opt/zookeeper-3.4.6 /opt/zookeeper \
-#    && cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg \
-#    && mkdir -p /tmp/zookeeper
-# uncomment if using above dl and java install
-# update java env
-# ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
-
 # ports that zookeeper needs exposed
 EXPOSE 2181 2888 3888
 
@@ -54,4 +44,4 @@ RUN chmod +x /usr/bin/start-zookeeper-server.sh
 RUN chmod +x /usr/bin/stop-zookeeper-server.sh
 
 # start the server
-RUN /usr/bin/start-zookeeper-server.sh
+CMD /usr/bin/start-zookeeper-server.sh &
